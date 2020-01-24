@@ -25,7 +25,7 @@ class GameBridge(BaseAgent):
 
     def __init__(self, name, team, index):
         super().__init__(name, team, index)
-        self.port = 8077
+        self.port = 8076
         self.is_retired = False
 
     def load_config(self, config_header):
@@ -115,7 +115,7 @@ class GameBridge(BaseAgent):
 
         ballGoalVector = (teamSign * ball_location, enemyGoal)
 
-        draw_debug(self.renderer, my_car, packet.game_ball, ballGoalVector, "idk")
+        draw_debug(self.renderer, my_car, packet.game_ball, ballGoalVector, "(rendering should be accessed in BridgeBot.py)")
         self.frame += 1
         return self.controller_state
 
@@ -281,25 +281,6 @@ class GameBridge(BaseAgent):
             "type": 0
         }]
         return gamePacket
-
-def find_correction(current: Vec3, ideal: Vec3) -> float:
-    # Finds the angle from current to ideal vector in the xy-plane. Angle will be between -pi and +pi.
-
-    # The in-game axes are left handed, so use -x
-    current_in_radians = math.atan2(current.y, -current.x)
-    ideal_in_radians = math.atan2(ideal.y, -ideal.x)
-
-    diff = ideal_in_radians - current_in_radians
-
-    # Make sure that diff is between -pi and +pi.
-    if abs(diff) > math.pi:
-        if diff < 0:
-            diff += 2 * math.pi
-        else:
-            diff -= 2 * math.pi
-
-    return diff
-
 
 def draw_debug(renderer, car, ball, vector, action_display):
     renderer.begin_rendering()
