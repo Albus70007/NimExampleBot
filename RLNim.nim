@@ -58,7 +58,7 @@ proc try_connect*(self: Bot, add: string = "localhost", port: Port) =
 proc receivePacket(self: Bot): JsonNode =
     let header: uint16 = rollBytes(self.rootsocket.recv(2))
     let received: string = self.rootsocket.recv(header.int)
-    let packet: JsonNode = packedjson.parseJson("{\"Game\":" & received & "}")
+    let packet: JsonNode = packedjson.parseJson(received)
     return packet
 
 # This function returns the bot's outputs to the bridge bot.
@@ -77,7 +77,7 @@ proc send_inputs(self: Bot, game_info: JsonNode, process_game: proc(game_info: J
 # PythonBridge/src/BridgeBot.py (not commented)
 proc receive_and_respond*(self: Bot, process_game: proc(game_info: JsonNode): PlayerInputs) =
     let game_info: JsonNode = self.receivePacket()
-    if game_info["Game"][0]["is_match_ended"].getBool() == true:
+    if game_info[0]["is_match_ended"].getBool() == true:
         raise newException(Exception, "Match Eneded")
     else:
         self.send_inputs(game_info, process_game)

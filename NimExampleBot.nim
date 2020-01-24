@@ -32,10 +32,10 @@ proc process_game(game_info: JsonNode): PlayerInputs =
     # inside RLNim.nim handles this, while some functions inside
     # RLNimUtilities.nim convert blocks of data such as Vectors and Rotators
     # into proper Nim data types (also defined inside RLNimUtilities.nim)
-    index = game_info["Game"]["index"].getInt()
-    ballPosition = game_info["Game"][0]["ball"]["position"].getVector3()
-    carPosition = game_info["Game"][0]["cars"][index]["position"].getVector3()
-    carRotation = game_info["Game"][0]["cars"][index]["euler_angles"].getRotator()
+    index = game_info["index"].getInt()
+    ballPosition = game_info[0]["ball"]["position"].getVector3()
+    carPosition = game_info[0]["cars"][index]["position"].getVector3()
+    carRotation = game_info[0]["cars"][index]["euler_angles"].getRotator()
 
     botToTargetAngle = math.arctan2(ballPosition.Y - carPosition.Y, 
                                     ballPosition.X - carPosition.X)
