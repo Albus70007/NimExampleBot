@@ -1,4 +1,4 @@
-import net, math, strutils, packedjson 
+import net, math, vmath, strutils, packedjson 
 import RLNim
 import RLNimUtilities # Should be changed to a propper Vectors library, i dont recommend you to use it
 
@@ -8,8 +8,8 @@ import RLNimUtilities # Should be changed to a propper Vectors library, i dont r
 var 
     index: int
 
-    ballPosition: Vector3
-    carPosition: Vector3
+    ballPosition: Vec3
+    carPosition: Vec3
     carRotation: Rotator
 
     botToTargetAngle: float64
@@ -37,8 +37,8 @@ proc process_game(game_info: JsonNode): PlayerInputs =
     carPosition = game_info[0]["cars"][index]["position"].getVector3()
     carRotation = game_info[0]["cars"][index]["euler_angles"].getRotator()
 
-    botToTargetAngle = math.arctan2(ballPosition.Y - carPosition.Y, 
-                                    ballPosition.X - carPosition.X)
+    botToTargetAngle = math.arctan2(ballPosition.y - carPosition.y, 
+                                    ballPosition.x - carPosition.x)
     botFrontToTargetAngle = botToTargetAngle - carRotation.Yaw;
 
     if botFrontToTargetAngle < -math.PI:
