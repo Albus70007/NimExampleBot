@@ -1,6 +1,6 @@
 import net, math, vmath, strutils, packedjson 
 import RLNim
-import RLNimUtilities # Should be changed to a propper Vectors library, i dont recommend you to use it
+import RLNimUtilities
 
 
 # Initialising all the variables we need
