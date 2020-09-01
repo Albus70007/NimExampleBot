@@ -12,4 +12,4 @@ binDir      = "./"
 
 # Dependencies
 
-requires "nim >= 1.2.2", "vmath", "msgpack4nim"
+requires "nim >= 1.2.2", "vmath"
