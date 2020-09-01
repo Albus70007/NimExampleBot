@@ -36,8 +36,8 @@ method get_output*(self: NimExampleBot, packet: GameTickPacket) =
   # once it gets more complex
 
   if botFrontToTargetAngle > 0:
-      steer = 1
+      self.inputs.steer = 1
   elif botFrontToTargetAngle < 0:
-      steer = -1
+      self.inputs.steer = -1
 
-  throttle = 1
+  self.inputs.throttle = 1
