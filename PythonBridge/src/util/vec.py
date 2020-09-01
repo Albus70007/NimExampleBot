@@ -1,6 +1,9 @@
 import math
 
 
+def nimVec2pyVec(nimVec):
+    return [nimVec["x"], nimVec["y"], nimVec["z"]]
+
 # This is a helper class for vector math. You can extend it or delete if you want.
 class Vec3:
     """
