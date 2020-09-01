@@ -2,16 +2,16 @@ import net, math, vmath, strutils
 import RLNim/RLnim
 
 
-type Nimbot* = ref object of Bot
+type NimExampleBot* = ref object of Bot
 
 
-method initalize_agent*(self: Nimbot) =
+method initalize_agent*(self: NimExampleBot) =
   self.team = if self.team == 0: 1 else: -1
   echo("initialized!")
   echo(self.team)
 
 
-method get_output*(self: Nimbot, packet: GameTickPacket) =
+method get_output*(self: NimExampleBot, packet: GameTickPacket) =
   # We get game information from the socket, the tiny Nim "framework"
   # inside RLNim.nim handles this, while some functions inside
   # RLNimUtilities.nim convert blocks of data such as Vectors and Rotators
